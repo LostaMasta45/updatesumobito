@@ -180,10 +180,26 @@ export default function Home() {
                         {profile.category}
                     </div>
 
-                    <div className="text-sm sm:text-base space-y-2 text-gray-200 font-medium">
+                    <div className="text-sm sm:text-base space-y-2 text-gray-200 font-medium mb-6">
                         {profile.bio.map((line, i) => (
                             <p key={i}>{line}</p>
                         ))}
+                    </div>
+
+                    {/* Premium Profile Statistics */}
+                    <div className="flex justify-center gap-3 sm:gap-4 w-full px-2">
+                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-sm">
+                            <span className="font-black text-lg sm:text-xl text-[#ebdcd0]">{profile.stats.posts}</span>
+                            <span className="text-[10px] sm:text-xs font-semibold tracking-wider text-white/50 uppercase mt-0.5">Kiriman</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.2)] scale-105 z-10">
+                            <span className="font-black text-xl sm:text-2xl text-white">{profile.stats.followers}</span>
+                            <span className="text-[10px] sm:text-xs font-bold tracking-wider text-white/70 uppercase mt-0.5">Pengikut</span>
+                        </div>
+                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-sm">
+                            <span className="font-black text-lg sm:text-xl text-[#ebdcd0]">{profile.stats.following}</span>
+                            <span className="text-[10px] sm:text-xs font-semibold tracking-wider text-white/50 uppercase mt-0.5">Diikuti</span>
+                        </div>
                     </div>
                 </div>
 
@@ -256,6 +272,13 @@ export default function Home() {
                         </motion.div>
                     ))}
                 </motion.div>
+
+                {/* Footer Credits */}
+                <footer className="mt-14 mb-4 text-center">
+                    <p className="text-white/40 text-xs font-medium tracking-wide">
+                        &copy; {new Date().getFullYear()} Update Sumobito. All rights reserved.
+                    </p>
+                </footer>
             </main>
         </div>
     );
