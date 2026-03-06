@@ -26,10 +26,11 @@ const links = [
         label: "GRUP WA KOMUNITAS",
         subLabel: "Grup WA Official",
         icon: Users,
-        colorClass: "from-[#25D366] to-[#128C7E]", // WhatsApp Green
-        shadowClass: "shadow-[0_8px_30px_rgb(37,211,102,0.25)]",
-        iconBg: "bg-white/20 text-white",
-        textColor: "text-white",
+        // Vibrant Elegant Glassmorphism
+        colorClass: "bg-gradient-to-br from-[#25D366] to-[#128C7E]", // WhatsApp Green base for gradient
+        shadowClass: "shadow-[0_4px_24px_rgba(37,211,102,0.25)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)]",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        textColor: "text-white drop-shadow-md",
         children: [
             {
                 id: "grup-wa-2",
@@ -64,10 +65,10 @@ const links = [
         subLabel: "WA Admin Official",
         url: "https://api.whatsapp.com/send/?phone=62895623834500&text=Halo+Minto&type=phone_number&app_absent=0",
         icon: MessageCircle,
-        colorClass: "from-[#25D366] to-[#128C7E]", // WhatsApp Green
-        shadowClass: "shadow-[0_8px_30px_rgb(37,211,102,0.25)]",
-        iconBg: "bg-white/20 text-white",
-        textColor: "text-white"
+        colorClass: "bg-gradient-to-br from-[#25D366] to-[#128C7E]",
+        shadowClass: "shadow-[0_4px_24px_rgba(37,211,102,0.25)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)]",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        textColor: "text-white drop-shadow-md"
     },
     {
         id: "instagram",
@@ -75,26 +76,25 @@ const links = [
         subLabel: "Instagram Official",
         url: "https://www.instagram.com/updatesumobito",
         icon: Instagram,
-        colorClass: "from-[#833AB4] via-[#F56040] to-[#FCAF45]", // Instagram Standard Gradient (Purple to Orange-Yellow)
-        shadowClass: "shadow-[0_8px_30px_rgb(131,58,180,0.3)]",
-        iconBg: "bg-white/20 text-white",
-        textColor: "text-white"
+        colorClass: "bg-gradient-to-tr from-[#833AB4] via-[#F56040] to-[#FCAF45]",
+        shadowClass: "shadow-[0_4px_24px_rgba(225,48,108,0.25)] hover:shadow-[0_8px_32px_rgba(225,48,108,0.4)]",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        textColor: "text-white drop-shadow-md"
     },
     {
         id: "tiktok",
         label: "TIKTOK OFFICIAL",
         subLabel: "TikTok Official",
         url: "https://www.tiktok.com/@updatesumobito",
-        // Custom SVG for TikTok
         icon: (props: any) => (
             <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
             </svg>
         ),
-        colorClass: "bg-black", // TikTok is primarily black
-        shadowClass: "shadow-[0_8px_30px_rgb(0,0,0,0.3)]",
-        iconBg: "bg-[#25F4EE]/20 text-[#25F4EE]", // Cyan tint for icon
-        textColor: "text-white"
+        colorClass: "bg-gray-900", // Solid black/dark gray base for tiktok
+        shadowClass: "shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_32px_rgba(37,244,238,0.3)] hover:ring-1 hover:ring-[#25F4EE]/50",
+        iconContainer: "bg-gradient-to-tr from-[#25F4EE]/30 to-[#FE2C55]/30 text-white backdrop-blur-md ring-1 ring-white/20",
+        textColor: "text-white drop-shadow-md"
     },
     {
         id: "facebook",
@@ -102,10 +102,10 @@ const links = [
         subLabel: "FB Update Sumobito",
         url: "https://www.facebook.com/groups/303799680277553",
         icon: Facebook,
-        colorClass: "from-[#1877F2] to-[#0C5AB3]", // Facebook Blue
-        shadowClass: "shadow-[0_8px_30px_rgb(24,119,242,0.3)]",
-        iconBg: "bg-white/20 text-white",
-        textColor: "text-white"
+        colorClass: "bg-gradient-to-br from-[#1877F2] to-[#0A4B9C]",
+        shadowClass: "shadow-[0_4px_24px_rgba(24,119,242,0.25)] hover:shadow-[0_8px_32px_rgba(24,119,242,0.4)]",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        textColor: "text-white drop-shadow-md"
     }
 ];
 
@@ -159,17 +159,20 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
                     className="group block w-full rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#161210] text-left"
                 >
                     <div className={cn(
-                        "relative flex items-stretch rounded-2xl overflow-hidden border border-white/20 transition-all duration-300",
-                        link.colorClass.startsWith("bg-") ? link.colorClass : `bg-gradient-to-r ${link.colorClass}`,
-                        link.shadowClass,
-                        "hover:scale-[1.015] active:scale-[0.99] hover:shadow-2xl cursor-pointer"
+                        "relative flex items-stretch rounded-2xl overflow-hidden transition-all duration-300 group-hover:scale-[1.015] active:scale-[0.99]",
+                        link.colorClass,
+                        link.shadowClass
                     )}>
-                        <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none"></div>
-                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"></div>
+                        {/* Dynamic energetic glass overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.15] to-transparent pointer-events-none"></div>
+                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
 
-                        <div className="flex items-center justify-center p-4 border-r border-white/10 bg-black/10 z-10 backdrop-blur-md relative">
-                            <div className={cn("p-2 rounded-[14px] shadow-sm backdrop-blur-sm", link.iconBg)}>
-                                <link.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+                        {/* Top elegant highlight */}
+                        <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+
+                        <div className="flex items-center justify-center p-4 border-r border-white/10 relative z-10 bg-black/10 backdrop-blur-sm">
+                            <div className={cn("p-2 sm:p-2.5 rounded-xl transition-transform duration-300 group-hover:scale-110", link.iconContainer)}>
+                                <link.icon className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-md" strokeWidth={2} />
                             </div>
                         </div>
 
@@ -263,18 +266,21 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
                 className="group block w-full rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#161210]"
             >
                 <div className={cn(
-                    "relative flex items-stretch rounded-2xl overflow-hidden border border-white/20 transition-all duration-300",
-                    link.colorClass.startsWith("bg-") ? link.colorClass : `bg-gradient-to-r ${link.colorClass}`,
+                    "relative flex items-stretch rounded-[18px] overflow-hidden transition-all duration-300",
+                    link.colorClass,
                     link.shadowClass,
-                    link.isFull ? "opacity-80 grayscale-[40%]" : "hover:scale-[1.015] active:scale-[0.99] hover:shadow-2xl cursor-pointer",
-                    link.isFull && "cursor-not-allowed"
+                    link.isFull ? "opacity-60 grayscale-[80%]" : "hover:scale-[1.015] active:scale-[0.99] cursor-pointer group hover:ring-2 hover:ring-white/20"
                 )}>
-                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent pointer-events-none"></div>
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent pointer-events-none"></div>
+                    {/* Dynamic energetic glass overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.15] to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
 
-                    <div className="flex items-center justify-center p-4 border-r border-white/10 bg-black/10 z-10 backdrop-blur-md relative">
-                        <div className={cn("p-2 rounded-[14px] shadow-sm backdrop-blur-sm", link.iconBg)}>
-                            <link.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.5} />
+                    {/* Top elegant highlight */}
+                    <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+
+                    <div className="flex items-center justify-center p-4 border-r border-white/10 relative z-10 bg-black/10 backdrop-blur-sm">
+                        <div className={cn("p-2 sm:p-2.5 rounded-xl transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110", link.iconContainer)}>
+                            <link.icon className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-md" strokeWidth={2} />
                         </div>
                     </div>
 
