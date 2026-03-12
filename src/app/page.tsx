@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link2, MessageCircle, Instagram, Code, Facebook, Smartphone, ChevronDown, Users } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const profile = {
@@ -109,37 +109,19 @@ const links = [
     }
 ];
 
-// Dark background graphic with premium noise and animated glow
+// Dark background graphic with premium noise and static glow (optimized for smooth scroll & high pagespeed)
 const BackgroundGlow = () => (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#120e0c]">
-        {/* Animated Glow 1 */}
-        <motion.div
-            animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.35, 0.45, 0.35],
-                x: [0, 20, 0],
-                y: [0, -20, 0]
-            }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-[#36271c] rounded-full blur-[130px]"
-        />
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#120e0c] transform-gpu">
+        {/* Glow 1 - Static to avoid heavy layout repaints */}
+        <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-[#36271c] rounded-full blur-[100px] opacity-40 transform-gpu" />
 
-        {/* Animated Glow 2 */}
-        <motion.div
-            animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.25, 0.35, 0.25],
-                x: [0, -20, 0],
-                y: [0, 20, 0]
-            }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#4a3424] rounded-full blur-[120px]"
-        />
+        {/* Glow 2 - Static */}
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#4a3424] rounded-full blur-[100px] opacity-30 transform-gpu" />
 
-        {/* Subtle SVG Grain Texture */}
+        {/* Subtle SVG Grain Texture (Removed mix-blend-overlay, reduced octaves to 1 for performance) */}
         <div
-            className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
-            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+            className="absolute inset-0 opacity-[0.03]"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
         />
     </div>
 );
@@ -344,10 +326,9 @@ export default function Home() {
                             <div className="rounded-full bg-[#161210] p-[3px] w-full h-full"></div>
                         </div>
 
-                        <Avatar className="w-24 h-24 sm:w-28 sm:h-28 relative z-10 border border-transparent">
-                            <AvatarImage src={profile.avatarUrl} className="object-cover" />
-                            <AvatarFallback>US</AvatarFallback>
-                        </Avatar>
+                        <div className="w-24 h-24 sm:w-28 sm:h-28 relative z-10 rounded-full border border-transparent overflow-hidden transform-gpu">
+                            <Image src={profile.avatarUrl} alt={profile.displayName} fill sizes="(max-width: 640px) 96px, 112px" priority className="object-cover" />
+                        </div>
 
                         {/* Verified Badge / Decorator (Optional, mimicking reference) */}
                         <div className="absolute bottom-0 right-0 z-20 bg-[#161210] rounded-full p-1 transform translate-x-1/4 translate-y-1/4">
