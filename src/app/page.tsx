@@ -29,7 +29,7 @@ const links = [
         // Vibrant Elegant Glassmorphism
         colorClass: "bg-gradient-to-br from-[#25D366] to-[#128C7E]", // WhatsApp Green base for gradient
         shadowClass: "shadow-[0_4px_24px_rgba(37,211,102,0.25)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)]",
-        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
         textColor: "text-white drop-shadow-md",
         children: [
             {
@@ -67,7 +67,7 @@ const links = [
         icon: MessageCircle,
         colorClass: "bg-gradient-to-br from-[#25D366] to-[#128C7E]",
         shadowClass: "shadow-[0_4px_24px_rgba(37,211,102,0.25)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)]",
-        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
         textColor: "text-white drop-shadow-md"
     },
     {
@@ -78,7 +78,7 @@ const links = [
         icon: Instagram,
         colorClass: "bg-gradient-to-tr from-[#833AB4] via-[#F56040] to-[#FCAF45]",
         shadowClass: "shadow-[0_4px_24px_rgba(225,48,108,0.25)] hover:shadow-[0_8px_32px_rgba(225,48,108,0.4)]",
-        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
         textColor: "text-white drop-shadow-md"
     },
     {
@@ -93,7 +93,7 @@ const links = [
         ),
         colorClass: "bg-gray-900", // Solid black/dark gray base for tiktok
         shadowClass: "shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_32px_rgba(37,244,238,0.3)] hover:ring-1 hover:ring-[#25F4EE]/50",
-        iconContainer: "bg-gradient-to-tr from-[#25F4EE]/30 to-[#FE2C55]/30 text-white backdrop-blur-md ring-1 ring-white/20",
+        iconContainer: "bg-gradient-to-tr from-[#25F4EE]/30 to-[#FE2C55]/30 text-white backdrop-blur-sm ring-1 ring-white/20",
         textColor: "text-white drop-shadow-md"
     },
     {
@@ -104,7 +104,7 @@ const links = [
         icon: Facebook,
         colorClass: "bg-gradient-to-br from-[#1877F2] to-[#0A4B9C]",
         shadowClass: "shadow-[0_4px_24px_rgba(24,119,242,0.25)] hover:shadow-[0_8px_32px_rgba(24,119,242,0.4)]",
-        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-md",
+        iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
         textColor: "text-white drop-shadow-md"
     }
 ];
@@ -112,11 +112,17 @@ const links = [
 // Dark background graphic with premium noise and static glow (optimized for smooth scroll & high pagespeed)
 const BackgroundGlow = () => (
     <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#120e0c] transform-gpu">
-        {/* Glow 1 - Static to avoid heavy layout repaints */}
-        <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-[#36271c] rounded-full blur-[100px] opacity-40 transform-gpu" />
+        {/* Glow 1 - Using radial gradients instead of blur for massive mobile performance boost */}
+        <div 
+            className="absolute top-[0%] left-[-10%] w-[100%] h-[100%] opacity-40 transform-gpu" 
+            style={{ background: 'radial-gradient(circle at 30% 30%, #36271c 0%, transparent 60%)' }} 
+        />
 
         {/* Glow 2 - Static */}
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#4a3424] rounded-full blur-[100px] opacity-30 transform-gpu" />
+        <div 
+            className="absolute bottom-[-10%] right-[-10%] w-[100%] h-[100%] opacity-30 transform-gpu" 
+            style={{ background: 'radial-gradient(circle at 70% 70%, #4a3424 0%, transparent 60%)' }} 
+        />
 
         {/* Subtle SVG Grain Texture (Removed mix-blend-overlay, reduced octaves to 1 for performance) */}
         <div
@@ -171,7 +177,7 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
 
                                 {/* Enhanced UX affordance for Dropdown */}
                                 <div className="flex items-center gap-2">
-                                    <span className="hidden sm:inline-block text-[10px] font-bold text-white/60 uppercase tracking-wider bg-black/20 px-2 py-1 rounded-md backdrop-blur-md border border-white/5">
+                                    <span className="hidden sm:inline-block text-[10px] font-bold text-white/60 uppercase tracking-wider bg-black/20 px-2 py-1 rounded-md backdrop-blur-sm border border-white/5">
                                         {isOpen ? "TUTUP" : "LIHAT"}
                                     </span>
                                     <motion.div
@@ -356,15 +362,15 @@ export default function Home() {
 
                     {/* Premium Profile Statistics */}
                     <div className="flex justify-center gap-3 sm:gap-4 w-full px-2">
-                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-sm">
+                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-sm">
                             <span className="font-black text-lg sm:text-xl text-[#ebdcd0]">{profile.stats.posts}</span>
                             <span className="text-[10px] sm:text-xs font-semibold tracking-wider text-white/50 uppercase mt-0.5">Kiriman</span>
                         </div>
-                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.2)] scale-105 z-10">
+                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.2)] scale-105 z-10">
                             <span className="font-black text-xl sm:text-2xl text-white">{profile.stats.followers}</span>
                             <span className="text-[10px] sm:text-xs font-bold tracking-wider text-white/70 uppercase mt-0.5">Pengikut</span>
                         </div>
-                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-sm">
+                        <div className="flex flex-col items-center justify-center flex-1 py-2 sm:py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl shadow-sm">
                             <span className="font-black text-lg sm:text-xl text-[#ebdcd0]">{profile.stats.following}</span>
                             <span className="text-[10px] sm:text-xs font-semibold tracking-wider text-white/50 uppercase mt-0.5">Diikuti</span>
                         </div>
