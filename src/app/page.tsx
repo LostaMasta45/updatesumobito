@@ -30,7 +30,7 @@ const links = [
         colorClass: "bg-gradient-to-br from-[#25D366] to-[#128C7E]", // WhatsApp Green base for gradient
         shadowClass: "shadow-[0_4px_24px_rgba(37,211,102,0.25)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)]",
         iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
-        textColor: "text-white drop-shadow-md",
+        textColor: "text-white",
         children: [
             {
                 id: "grup-wa-2",
@@ -68,7 +68,7 @@ const links = [
         colorClass: "bg-gradient-to-br from-[#25D366] to-[#128C7E]",
         shadowClass: "shadow-[0_4px_24px_rgba(37,211,102,0.25)] hover:shadow-[0_8px_32px_rgba(37,211,102,0.4)]",
         iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
-        textColor: "text-white drop-shadow-md"
+        textColor: "text-white"
     },
     {
         id: "instagram",
@@ -79,7 +79,7 @@ const links = [
         colorClass: "bg-gradient-to-tr from-[#833AB4] via-[#F56040] to-[#FCAF45]",
         shadowClass: "shadow-[0_4px_24px_rgba(225,48,108,0.25)] hover:shadow-[0_8px_32px_rgba(225,48,108,0.4)]",
         iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
-        textColor: "text-white drop-shadow-md"
+        textColor: "text-white"
     },
     {
         id: "tiktok",
@@ -94,7 +94,7 @@ const links = [
         colorClass: "bg-gray-900", // Solid black/dark gray base for tiktok
         shadowClass: "shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_32px_rgba(37,244,238,0.3)] hover:ring-1 hover:ring-[#25F4EE]/50",
         iconContainer: "bg-gradient-to-tr from-[#25F4EE]/30 to-[#FE2C55]/30 text-white backdrop-blur-sm ring-1 ring-white/20",
-        textColor: "text-white drop-shadow-md"
+        textColor: "text-white"
     },
     {
         id: "facebook",
@@ -105,7 +105,7 @@ const links = [
         colorClass: "bg-gradient-to-br from-[#1877F2] to-[#0A4B9C]",
         shadowClass: "shadow-[0_4px_24px_rgba(24,119,242,0.25)] hover:shadow-[0_8px_32px_rgba(24,119,242,0.4)]",
         iconContainer: "bg-white/25 text-white shadow-sm ring-1 ring-white/30 backdrop-blur-sm",
-        textColor: "text-white drop-shadow-md"
+        textColor: "text-white"
     }
 ];
 
@@ -138,7 +138,7 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
     if (link.children) {
         return (
             <motion.div variants={itemVars} className="flex flex-col">
-                <h3 className="text-center font-semibold text-[#ebdcd0]/90 text-[13px] sm:text-[15px] tracking-[0.2em] uppercase mb-3 drop-shadow-sm pb-1 border-b border-[#ebdcd0]/20 mx-auto w-fit">
+                <h3 className="text-center font-semibold text-[#ebdcd0]/90 text-[13px] sm:text-[15px] tracking-[0.2em] uppercase mb-3 pb-1 border-b border-[#ebdcd0]/20 mx-auto w-fit">
                     {link.label}
                 </h3>
 
@@ -160,14 +160,14 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
 
                         <div className="flex items-center justify-center p-4 border-r border-white/10 relative z-10 bg-black/10 backdrop-blur-sm">
                             <div className={cn("p-2 sm:p-2.5 rounded-xl transition-transform duration-300 group-hover:scale-110", link.iconContainer)}>
-                                <link.icon className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-md" strokeWidth={2} />
+                                <link.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2} />
                             </div>
                         </div>
 
                         <div className="flex flex-1 items-center px-4 sm:px-5 py-3 sm:py-4 z-10 relative overflow-hidden">
                             <div className="flex flex-1 min-w-0 items-center justify-between">
                                 <div className="flex flex-col truncate pr-2">
-                                    <span className={cn("font-bold text-[14.5px] sm:text-[17px] tracking-wider drop-shadow-sm truncate", link.textColor)}>
+                                    <span className={cn("font-bold text-[14.5px] sm:text-[17px] tracking-wider truncate", link.textColor)}>
                                         {link.subLabel}
                                     </span>
                                     <span className="text-[10px] sm:text-[11px] font-medium text-white/70 uppercase tracking-widest mt-0.5 opacity-90">
@@ -182,7 +182,7 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
                                     </span>
                                     <motion.div
                                         animate={{ rotate: isOpen ? 180 : 0 }}
-                                        transition={{ duration: 0.3 }}
+                                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
                                         className={cn("flex-shrink-0 p-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 shadow-sm", link.textColor)}
                                     >
                                         <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 opacity-90" strokeWidth={2.5} />
@@ -193,16 +193,19 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
                     </div>
                 </button>
 
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                     {isOpen && (
                         <motion.div
-                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                            animate={{ height: "auto", opacity: 1, marginTop: 12 }}
-                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                            className="flex flex-col overflow-hidden"
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                            transition={{
+                                height: { type: "spring", bounce: 0, duration: 0.4 },
+                                opacity: { duration: 0.25, ease: "easeInOut" }
+                            }}
                         >
-                            <div className="pl-4 pr-1 space-y-3 relative border-l-2 border-white/10 ml-6 pb-2">
+                            <div className="pt-3 pl-4 pr-1 space-y-3 relative border-l-2 border-white/10 ml-6 pb-2">
                                 {link.children.map((child: any) => (
                                     <a
                                         key={child.id}
@@ -215,7 +218,7 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
                                         <div className="absolute left-[-18px] top-1/2 w-4 border-t-2 border-white/10 -translate-y-1/2"></div>
                                         <div className={cn(
                                             "relative flex items-center p-3 sm:p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300",
-                                            child.isFull ? "opacity-70 grayscale-[30%]" : "hover:bg-white/10 hover:border-white/20 active:scale-[0.98]"
+                                            child.isFull ? "opacity-40" : "hover:bg-white/10 hover:border-white/20 active:scale-[0.98]"
                                         )}>
                                             <div className="p-2 mr-3 sm:mr-4 rounded-lg bg-[#25D366]/20 text-[#25D366] shadow-[0_0_15px_rgba(37,211,102,0.2)]">
                                                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -243,7 +246,7 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
 
     return (
         <motion.div variants={itemVars} className="flex flex-col">
-            <h3 className="text-center font-semibold text-[#ebdcd0]/90 text-[13px] sm:text-[15px] tracking-[0.2em] uppercase mb-3 drop-shadow-sm pb-1 border-b border-[#ebdcd0]/20 mx-auto w-fit">
+            <h3 className="text-center font-semibold text-[#ebdcd0]/90 text-[13px] sm:text-[15px] tracking-[0.2em] uppercase mb-3 pb-1 border-b border-[#ebdcd0]/20 mx-auto w-fit">
                 {link.label}
             </h3>
 
@@ -257,7 +260,7 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
                     "relative flex items-stretch rounded-[18px] overflow-hidden transition-all duration-300",
                     link.colorClass,
                     link.shadowClass,
-                    link.isFull ? "opacity-60 grayscale-[80%]" : "hover:scale-[1.015] active:scale-[0.99] cursor-pointer group hover:ring-2 hover:ring-white/20"
+                    link.isFull ? "opacity-40" : "hover:scale-[1.015] active:scale-[0.99] cursor-pointer group hover:ring-2 hover:ring-white/20"
                 )}>
                     {/* Dynamic energetic glass overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/[0.15] to-transparent pointer-events-none"></div>
@@ -268,14 +271,14 @@ const LinkItemCard = ({ link, itemVars }: { link: any, itemVars: any }) => {
 
                     <div className="flex items-center justify-center p-4 border-r border-white/10 relative z-10 bg-black/10 backdrop-blur-sm">
                         <div className={cn("p-2 sm:p-2.5 rounded-xl transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110", link.iconContainer)}>
-                            <link.icon className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-md" strokeWidth={2} />
+                            <link.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2} />
                         </div>
                     </div>
 
                     <div className="flex flex-1 items-center px-4 sm:px-5 py-3 sm:py-4 z-10 relative overflow-hidden">
                         <div className="flex flex-1 min-w-0 items-center justify-between">
                             <div className="flex items-center gap-2 truncate pr-2">
-                                <span className={cn("font-bold text-[14.5px] sm:text-[17px] tracking-wider drop-shadow-sm truncate", link.textColor)}>
+                                <span className={cn("font-bold text-[14.5px] sm:text-[17px] tracking-wider truncate", link.textColor)}>
                                     {link.subLabel}
                                 </span>
                                 {link.isFull && (
